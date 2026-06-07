@@ -1,3 +1,7 @@
+## 2.1.3
+
+- Downgrade [meta](https://pub.dev/packages/meta) to ^1.18.0
+
 ## 2.1.2
 
 - Add [pavluke_lints](https://pub.dev/packages/pavluke_lints)
