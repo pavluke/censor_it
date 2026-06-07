@@ -48,7 +48,7 @@ final class CensorItRandom extends CensorIt {
     '&',
     '?',
     '@',
-    '\$',
+    r'$',
   ];
 
   /// The list of characters to use for censoring.

@@ -1,7 +1,7 @@
 name: censor_it
 description: A Dart library for censoring text based on predefined patterns and
   customizable characters.
-version: 2.1.1
+version: 2.1.2
 repository: https://github.com/pavluke/censor_it
 homepage: https://github.com/pavluke/censor_it
 issue_tracker: https://github.com/pavluke/censor_it/issues
@@ -11,9 +11,10 @@ environment:
 
 dependencies:
   collection: ^1.19.1
+  meta: ^1.18.3
 
 dev_dependencies:
-  lints: ^6.1.0
+  pavluke_lints: ^1.2.1
   test: ^1.31.0
 
 topics:

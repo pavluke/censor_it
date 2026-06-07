@@ -1,4 +1,10 @@
+// ignore_for_file: avoid_log
+
+import 'dart:developer';
+
 import 'package:censor_it/censor_it.dart';
+
+void _log(String msg) => log(msg, name: 'censor_it');
 
 void main() {
   const String text = '''
@@ -6,84 +12,84 @@ void main() {
 I don't give a fuck that there are a lot of obscene words here!
 I'm sure the developer of this lib is an asshole!''';
 
-  print('1. Basic English censoring with masking:');
+  _log('1. Basic English censoring with masking:');
   final basicCensor = CensorIt.mask(text, pattern: LanguagePattern.english);
-  print(basicCensor.censored);
-  print('Has profanity: ${basicCensor.hasProfanity}');
-  print('Swear words: ${basicCensor.swearWords}\n');
+  _log(basicCensor.censored);
+  _log('Has profanity: ${basicCensor.hasProfanity}');
+  _log('Swear words: ${basicCensor.swearWords}\n');
 
-  print('2. All languages pattern:');
-  final allLanguages = CensorIt.mask(text, pattern: LanguagePattern.all);
-  print(allLanguages.censored);
-  print('Total swear words: ${allLanguages.swearWords.length}\n');
+  _log('2. All languages pattern:');
+  final allLanguages = CensorIt.mask(text);
+  _log(allLanguages.censored);
+  _log('Total swear words: ${allLanguages.swearWords.length}\n');
 
-  print('3. Random character replacement:');
+  _log('3. Random character replacement:');
   final customChars = CensorIt.random(
     'This is fucking shit!',
     pattern: LanguagePattern.english,
     chars: ['*', '#', '@'],
   );
-  print(customChars.censored);
-  print('');
+  _log(customChars.censored);
+  _log('');
 
-  print('4. Simple masking with single character:');
+  _log('4. Simple masking with single character:');
   final simpleMask = CensorIt.mask('fuck', pattern: LanguagePattern.english);
-  print(simpleMask.censored);
-  print('');
+  _log(simpleMask.censored);
+  _log('');
 
-  print('5. Fixed string replacement:');
+  _log('5. Fixed string replacement:');
   final fixedReplace = CensorIt.replace(
     'fuck this shit',
     replacement: '[censored]',
     pattern: LanguagePattern.english,
   );
-  print(fixedReplace.censored);
-  print('');
+  _log(fixedReplace.censored);
+  _log('');
 
-  print('6. Custom builder function:');
+  _log('6. Custom builder function:');
   final customBuilder = CensorIt.builder(
     'fucking shit bastard',
     builder: (word) => word.length <= 4 ? '💩' : '🤬',
     pattern: LanguagePattern.english,
   );
-  print(customBuilder.censored);
-  print('');
+  _log(customBuilder.censored);
+  _log('');
 
-  print('7. Using .censored() extension:');
-  print('fuck this shit'.censored(pattern: LanguagePattern.english));
-  print('');
+  _log('7. Using .censored() extension:');
+  _log('fuck this shit'.censored(pattern: LanguagePattern.english));
+  _log('');
 
-  print('8. Regenerating random censored text:');
+  _log('8. Regenerating random censored text:');
   final original = CensorIt.random('shit', pattern: LanguagePattern.english);
-  print('First:  ${original.censored}');
+  _log('First:  ${original.censored}');
   final regenerated = original.regenerate();
-  print('Second: ${regenerated.censored}');
+  _log('Second: ${regenerated.censored}');
   final thirdGen = regenerated.regenerate();
-  print('Third:  ${thirdGen.censored}\n');
+  _log('Third:  ${thirdGen.censored}\n');
 
-  print('9. Custom RegExp pattern:');
+  _log('9. Custom RegExp pattern:');
   final customPattern = CensorIt.mask(
     'badword and anotherbad in text',
-    pattern: CensorPattern.fromRegExp(RegExp(r'badword|anotherbad')),
+    pattern: CensorPattern.fromRegExp(RegExp('badword|anotherbad')),
   );
-  print(customPattern.censored);
-  print('Custom words found: ${customPattern.swearWords}\n');
+  _log(customPattern.censored);
+  _log('Custom words found: ${customPattern.swearWords}\n');
 
-  print('10. Multi-language censoring:');
+  _log('10. Multi-language censoring:');
   final multiLang = CensorIt.random(
     'fuck you puta',
     pattern: LanguagePattern.fromLocales(['en', 'es', 'ru']),
   );
-  print(multiLang.censored);
-  print('Languages detected: ${multiLang.swearWords}\n');
+  _log(multiLang.censored);
+  _log('Languages detected: ${multiLang.swearWords}\n');
 
-  print('11. Using GetMatchesX extension:');
+  _log('11. Using GetMatchesX extension:');
   final matchesExample = CensorIt.random(
     'fuck this shit bastard',
     pattern: LanguagePattern.english,
   );
-  print('Total matches: ${matchesExample.matches.length}');
+  _log('Total matches: ${matchesExample.matches.length}');
   for (final match in matchesExample.matches) {
-    print('  - Found "${match.group(0)}" at index ${match.start}');
+    _log('  - Found "${match.group(0)}" at index ${match.start}');
   }
 }

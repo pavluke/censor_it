@@ -23,7 +23,7 @@ void main() {
       SvSample(),
       UkSample(),
       ZhSample(),
-    ].map((e) => CensorItTest(e));
+    ].map(CensorItTest.new);
 
     group('Dirty words detection', () {
       for (final pattern in patterns) {
@@ -215,7 +215,6 @@ void main() {
     test('repeats character by word length', () {
       final censor = CensorIt.mask(
         'fuck',
-        char: '*',
         pattern: LanguagePattern.english,
       );
 
@@ -225,7 +224,6 @@ void main() {
     test('preserves case with mask character', () {
       final censor = CensorIt.mask(
         'SHIT and fuck',
-        char: '*',
         pattern: LanguagePattern.english,
       );
 
@@ -313,7 +311,6 @@ void main() {
       const text = 'shit хуй kurwa merde';
       final censor = CensorIt.random(
         text,
-        pattern: LanguagePattern.all,
       );
 
       expect(censor.hasProfanity, isTrue);
@@ -321,8 +318,8 @@ void main() {
     });
 
     test('custom patterns are independent', () {
-      final pattern1 = CensorPattern.fromRegExp(RegExp(r'first'));
-      final pattern2 = CensorPattern.fromRegExp(RegExp(r'second'));
+      final pattern1 = CensorPattern.fromRegExp(RegExp('first'));
+      final pattern2 = CensorPattern.fromRegExp(RegExp('second'));
 
       final censor1 = CensorIt.random('first word', pattern: pattern1);
       final censor2 = CensorIt.random('second word', pattern: pattern2);

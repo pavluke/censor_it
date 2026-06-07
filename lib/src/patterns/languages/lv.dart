@@ -15,21 +15,21 @@ final class LvPattern implements LanguagePattern {
 
   @override
   RegExp get regExp => RegExp(
-        r'(?<![a-zāčēģīķļņšūž])'
-        r'(?:'
-        r'pis[a-zāčēģīķļņšūž]*' // pist, pisies, pisu, pisās ...
-        r'|pizd[a-zāčēģīķļņšūž]*' // pizda, pizdets, pizdām ...
-        r'|dir[sš][a-zāčēģīķļņšūž]*' // dirsa, dirsā, dirš, diršot ...
-        r'|pimp[a-zāčēģīķļņšūž]*' // pimpis, pimpja, pimpi ...
-        r'|mauk(?:'
-        r'a(?:s|m)?' // mauka, maukas, maukam
-        r'|ai' // maukai
-        r'|ām' // maukām
-        r'|u|us' // mauku, maukus
-        r'|i|iem' // mauki, maukiem
-        r'|īt(?:e|es)?' // maukīte, maukītes
-        r'))'
-        r'(?![a-zāčēģīķļņšūž])',
+        '(?<![a-zāčēģīķļņšūž])'
+        '(?:'
+        'pis[a-zāčēģīķļņšūž]*'
+        '|pizd[a-zāčēģīķļņšūž]*'
+        '|dir[sš][a-zāčēģīķļņšūž]*'
+        '|pimp[a-zāčēģīķļņšūž]*'
+        '|mauk(?:'
+        'a(?:s|m)?'
+        '|ai'
+        '|ām'
+        '|u|us'
+        '|i|iem'
+        '|īt(?:e|es)?'
+        '))'
+        '(?![a-zāčēģīķļņšūž])',
         caseSensitive: false,
         unicode: true,
       );

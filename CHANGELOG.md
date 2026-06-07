@@ -1,6 +1,11 @@
+## 2.1.2
+
+- Add [pavluke_lints](https://pub.dev/packages/pavluke_lints)
+
 ## 2.1.1
- - Downgrade min requirement Dart SDK to 3.6.0
- - Replace ccTLD codes with ISO 639-1 language codes
+
+- Downgrade min requirement Dart SDK to 3.6.0
+- Replace ccTLD codes with ISO 639-1 language codes
 
 ## 2.1.0
 

@@ -14,27 +14,27 @@ final class DePattern implements LanguagePattern {
 
   @override
   RegExp get regExp => RegExp(
-        r'(?<![a-zäöüß])'
-        r'(?:'
-        r'(?:ver)?fick(?:'
-        r'|en' // ficken
-        r'|st' // fickst
-        r'|t' // fickt
-        r'|e' // ficke
-        r'|er?s?' // ficker, fickers
-        r'|te' // fickte
-        r'|test' // ficktest
-        r'|tet' // ficktet
-        r'|st?e?n?' // gefickt / verfickt
-        r')'
-        r'|schei(?:ß|ss)(?:e|er|t|lich|dreck)?' // scheiße & Co.
-        r'|arschloch'
-        r'|drecksau'
-        r'|hurensohn'
-        r'|fotze(?:n)?'
-        r'|wichser'
-        r')'
-        r'(?![a-zäöüß])',
+        '(?<![a-zäöüß])'
+        '(?:'
+        '(?:ver)?fick(?:'
+        '|en' // ficken
+        '|st' // fickst
+        '|t' // fickt
+        '|e' // ficke
+        '|er?s?' // ficker, fickers
+        '|te' // fickte
+        '|test' // ficktest
+        '|tet' // ficktet
+        '|st?e?n?' // gefickt / verfickt
+        ')'
+        '|schei(?:ß|ss)(?:e|er|t|lich|dreck)?' // scheiße & Co.
+        '|arschloch'
+        '|drecksau'
+        '|hurensohn'
+        '|fotze(?:n)?'
+        '|wichser'
+        ')'
+        '(?![a-zäöüß])',
         caseSensitive: false,
         unicode: true,
       );

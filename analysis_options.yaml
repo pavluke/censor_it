@@ -1,10 +1,10 @@
-include: package:lints/recommended.yaml
-
-linter:
-  rules:
-    - lines_longer_than_80_chars
-    - public_member_api_docs
+include: package:pavluke_lints/pavluke_lints.yaml
 
 formatter:
   page_width: 80
   trailing_commas: preserve
+
+analyzer:
+  errors:
+    avoid_equals_and_hash_code_on_mutable_classes: ignore
+    matching_super_parameters: ignore

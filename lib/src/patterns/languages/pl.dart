@@ -15,16 +15,16 @@ final class PlPattern implements LanguagePattern {
 
   @override
   RegExp get regExp => RegExp(
-        r'(?<![a-ząćęłńóśźż])'
-        r'(?:'
-        r'kurw[a-ząćęłńóśźż]*' // kurwa, kurwy, kurwie, kurwo...
-        r'|skurw[a-ząćęłńóśźż]*' // skurwiel, skurwysyn, skurwiony...
-        r'|chuj[a-ząćęłńóśźż]*' // chuj, chuja, chujem, chuje...
-        r'|jeb[a-ząćęłńóśźż]*' // jebać, jebany, jebana, jebane...
-        r'|pierdol[a-ząćęłńóśźż]*' // pierdolę, pierdolić, pierdolony...
-        r'|pizd[a-ząćęłńóśźż]*' // pizda, pizdy, pizdę, pizdo...
-        r')'
-        r'(?![a-ząćęłńóśźż])',
+        '(?<![a-ząćęłńóśźż])'
+        '(?:'
+        'kurw[a-ząćęłńóśźż]*'
+        '|skurw[a-ząćęłńóśźż]*'
+        '|chuj[a-ząćęłńóśźż]*'
+        '|jeb[a-ząćęłńóśźż]*'
+        '|pierdol[a-ząćęłńóśźż]*'
+        '|pizd[a-ząćęłńóśźż]*'
+        ')'
+        '(?![a-ząćęłńóśźż])',
         caseSensitive: false,
         unicode: true,
       );

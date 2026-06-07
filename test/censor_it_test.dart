@@ -16,7 +16,6 @@ class CensorItTest {
       final CensorIt censorIt = CensorIt.mask(
         textWithSwearWords,
         pattern: sample.pattern,
-        char: '*',
       );
 
       final List<String> detectedSwearWords = censorIt.swearWords;

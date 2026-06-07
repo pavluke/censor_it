@@ -19,6 +19,7 @@ import 'censor_it_base.dart';
 /// print(censor.censored); // '🤬 💩'
 /// ```
 /// {@endtemplate}
+///
 final class CensorItBuilder extends CensorIt {
   /// {@macro censor_it_builder}
   CensorItBuilder(

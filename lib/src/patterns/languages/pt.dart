@@ -15,17 +15,17 @@ final class PtPattern implements LanguagePattern {
 
   @override
   RegExp get regExp => RegExp(
-        r'(?<![a-záàâãçéêíóôõúü])'
-        r'(?:'
-        r'filhos?\s*da\s*puta' // filho da puta / filhos da puta
-        r'|caralh[a-záàâãçéêíóôõúü]*' // caralho, caralhada...
-        r'|fod[a-záàâãçéêíóôõúü-]*' // foda, foder, fodido, foda-se...
-        r'|porr[a-záàâãçéêíóôõúü]*' // porra, porrão, porrada (вулг.) ...
-        r'|puta[a-záàâãçéêíóôõúü]*' // puta, putaria...
-        r'|merd[a-záàâãçéêíóôõúü]*' // merda, merdas...
-        r'|cu(?:z[aã]o|zon[aã])?[a-záàâãçéêíóôõúü]*' // cu, cuzão, cuzona...
-        r')'
-        r'(?![a-záàâãçéêíóôõúü])',
+        '(?<![a-záàâãçéêíóôõúü])'
+        '(?:'
+        r'filhos?\s*da\s*puta'
+        '|caralh[a-záàâãçéêíóôõúü]*'
+        '|fod[a-záàâãçéêíóôõúü-]*'
+        '|porr[a-záàâãçéêíóôõúü]*'
+        '|puta[a-záàâãçéêíóôõúü]*'
+        '|merd[a-záàâãçéêíóôõúü]*'
+        '|cu(?:z[aã]o|zon[aã])?[a-záàâãçéêíóôõúü]*'
+        ')'
+        '(?![a-záàâãçéêíóôõúü])',
         caseSensitive: false,
         unicode: true,
       );

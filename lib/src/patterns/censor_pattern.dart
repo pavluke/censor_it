@@ -16,15 +16,15 @@ import 'multi_censor_pattern.dart';
 /// ]);
 /// ```
 abstract interface class CensorPattern {
-  /// {@template censor_pattern_regexp_getter}
-  /// Returns a regular expression for profanity detection.
-  /// {@endtemplate}
-  RegExp get regExp;
-
   /// {@macro custom_pattern_constructor}
   const factory CensorPattern.fromRegExp(RegExp regExp) = CustomPattern;
 
   /// {@macro multi_censor_pattern_constructor}
   const factory CensorPattern.multi(List<CensorPattern> patterns) =
       MultiCensorPattern;
+
+  /// {@template censor_pattern_regexp_getter}
+  /// Returns a regular expression for profanity detection.
+  /// {@endtemplate}
+  RegExp get regExp;
 }
