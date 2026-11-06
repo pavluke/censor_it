@@ -24,9 +24,9 @@ final class CensorItBuilder extends CensorIt {
   /// {@macro censor_it_builder}
   CensorItBuilder(
     super.text, {
-    required ReplacementBuilder builder,
+    required this._builder,
     super.pattern,
-  }) : _builder = builder;
+  });
 
   final ReplacementBuilder _builder;
 

@@ -12,34 +12,43 @@ final class RuPattern implements LanguagePattern {
   @override
   String get locale => 'ru';
 
-  @override
-  RegExp get regExp {
-    const prefixes = '(?:о[бт]?|за|на|от|под|пере|про|раз|вз|из|с|у|до|вы)';
+  static const _prefixes =
+      '(?:о[бт]?|за|на|от|под|пере|про|раз|вз|из|с|у|до|вы)';
 
-    return RegExp(
-      '(?<![а-яё])'
-      '(?:'
-      // хуй и производные
-      '$prefixes'
-      'ъ?ху[йеёиыяю][а-яёъь]*'
-      '|ху[йеёиыяю][а-яёъь]*'
-      '|'
-      '$prefixes'
-      'ъ?пизд[а-яёъь]*'
-      '|пизд[а-яёъь]*'
-      '|'
-      '$prefixes'
-      'ъ?[её]б[а-яёъь]*'
-      '|[её]б[а-яёъь]*'
-      '|'
-      '$prefixes'
-      'ъ?бляд[а-яёъь]*'
-      '|бляд[а-яёъь]*'
-      '|гандон[а-яёъь]*'
-      ')'
-      '(?![а-яё])',
-      caseSensitive: false,
-      unicode: true,
-    );
-  }
+  /// Prefixes for the "еб" root.
+  ///
+  /// The bare prefix "с" is intentionally excluded: it would turn
+  /// the ordinary words "себя", "себе", "себестоимость" into profanity.
+  /// Forms like "съебать" are still caught by `с(?=ъ)`.
+  static const _ebPrefixes =
+      '(?:о[бт]?|за|на|от|под|пере|про|раз|вз|из|у|до|вы|с(?=ъ))';
+
+  static final RegExp _regExp = RegExp(
+    '(?<![а-яё])'
+    '(?:'
+    // хуй и производные
+    '$_prefixes'
+    'ъ?ху[йеёиыяю][а-яёъь]*'
+    '|ху[йеёиыяю][а-яёъь]*'
+    '|'
+    '$_prefixes'
+    'ъ?пизд[а-яёъь]*'
+    '|пизд[а-яёъь]*'
+    '|'
+    '$_ebPrefixes'
+    'ъ?[её]б[а-яёъь]*'
+    '|[её]б[а-яёъь]*'
+    '|'
+    '$_prefixes'
+    'ъ?бляд[а-яёъь]*'
+    '|бляд[а-яёъь]*'
+    '|гандон[а-яёъь]*'
+    ')'
+    '(?![а-яё])',
+    caseSensitive: false,
+    unicode: true,
+  );
+
+  @override
+  RegExp get regExp => _regExp;
 }

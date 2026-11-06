@@ -3,7 +3,7 @@ description: Example for censor_it package.
 publish_to: none
 
 environment:
-  sdk: ">=3.6.0 <4.0.0"
+  sdk: ">=3.13.0 <4.0.0"
 
 dependencies:
   censor_it:

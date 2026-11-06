@@ -12,8 +12,7 @@ final class EnPattern implements LanguagePattern {
   @override
   String get locale => 'en';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-z])'
         '(?:'
         'motherfucker' // motherfucker
@@ -30,4 +29,7 @@ final class EnPattern implements LanguagePattern {
         '(?![a-z])', // right: not a letter (or end)
         caseSensitive: false,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

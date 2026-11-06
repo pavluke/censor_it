@@ -13,8 +13,7 @@ final class SvPattern implements LanguagePattern {
   @override
   String get locale => 'sv';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-zåäö])'
         '(?:'
         'fitt[a-zåäö]*'
@@ -24,10 +23,13 @@ final class SvPattern implements LanguagePattern {
         '|s'
         ')'
         '|knull[a-zåäö]*'
-        '|hor[a-zåäö]*'
+        '|hor(?:a|an|ar|arna|or|orna|unge|ungen|ungar|ungarna)'
         ')'
         '(?![a-zåäö])',
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

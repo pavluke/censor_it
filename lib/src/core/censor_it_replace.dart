@@ -22,9 +22,9 @@ final class CensorItReplace extends CensorIt {
   ///  {@macro censor_it_replace}
   CensorItReplace(
     super.text, {
-    required String replacement,
+    required this._replacement,
     super.pattern,
-  }) : _replacement = replacement;
+  });
 
   final String _replacement;
 

@@ -8,13 +8,20 @@ import '../src.dart';
 ///
 /// Example:
 /// ```dart
-/// print('fuck this'.censored(pattern: LanguagePattern.english));
+/// print('fuck this'.censor(pattern: LanguagePattern.english));
 /// ```
 /// {@endtemplate}
 extension CensoredX on String {
   /// {@macro censored_x.class}
+  String censor({
+    CensorPattern pattern = LanguagePattern.all,
+  }) => CensorIt.random(this, pattern: pattern).censored;
+
+  /// Use [censor] instead.
+  @Deprecated(
+    'Use censor() instead. Will be removed in the next major version.',
+  )
   String censored({
     CensorPattern pattern = LanguagePattern.all,
-  }) =>
-      CensorIt.random(this, pattern: pattern).censored;
+  }) => censor(pattern: pattern);
 }

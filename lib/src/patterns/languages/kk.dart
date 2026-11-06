@@ -13,8 +13,7 @@ final class KkPattern implements LanguagePattern {
   @override
   String get locale => 'kk';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![а-яёәғқңөұүһі])'
         '(?:'
         'қотақ[а-яёәғқңөұүһі]*' // қотақ, қотақты, қотақтың …
@@ -26,4 +25,7 @@ final class KkPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

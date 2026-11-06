@@ -1,3 +1,45 @@
+## 2.2.0
+
+### Added
+
+- **`String.censor()` extension** - Replaces `String.censored()` (random
+  character replacement). The new name no longer looks like the `censored`
+  getter of `CensorIt`, which does a different job
+
+### Deprecated
+
+- **`String.censored()` extension** - Use `String.censor()` instead
+
+### Fixed
+
+- **False positives in `LanguagePattern.all`** - Ordinary words such as
+  `customer`, `cute`, `cup`, `horizon`, `vitamin`, `pistol`, `Pisa` and Russian
+  `себя`/`себе` are no longer detected as profanity:
+  - Portuguese: `cu` matches only `cu`, `cuzão` and `cuzona`, not every `cu*`
+  - Finnish: `vitt?u*` instead of `vit*`
+  - Swedish: explicit `hora`/`horor`/`horunge` forms instead of `hor*`
+  - Latvian: `pistol`, `piston`, `pistachio` and `Pisa` no longer match
+  - Russian: the bare prefix `с` no longer combines with the `еб` root
+    (`съебать` is still detected)
+  - Italian: `cazzuola`, `stronzio`; French: `salopette`
+- **`CensorPattern.multi([])`** - An empty list now matches nothing. Previously
+  the combined regular expression matched an empty string at every position, so
+  any text was reported as profane
+- **Documentation examples** - `CensorIt.random` example in `README_RU.md`
+  (`r'\$'` is two characters and threw `ArgumentError`), output of the string
+  extension, number of supported languages, snippets in `MIGRATION.md`
+
+### Changed
+
+- **Performance** - Language regular expressions are compiled once instead of on
+  every access. The combined regular expression of `CensorPattern.multi` is
+  built once per instance, `LanguagePattern.fromLocales` memoizes the combined
+  pattern, and `matches` is computed once per `CensorIt` instance (`hasProfanity`
+  and `swearWords` reuse it)
+- **`GetMatchesX.matches` returns an unmodifiable list**
+- **`CensorPattern.multi` treats `patterns` as immutable** - The list must not
+  be modified after the first use of `regExp`
+
 ## 2.1.3
 
 - Downgrade [meta](https://pub.dev/packages/meta) to ^1.18.0
@@ -28,13 +70,13 @@
 ### Breaking Changes
 
 - **Main constructor replaced with factory constructors** - Use
-  `CensorIt.random()`, `CensorIt.mask()`, `CensorIt.builder()`, or
-  `CensorIt.replace()`
+`CensorIt.random()`, `CensorIt.mask()`, `CensorIt.builder()`, or
+`CensorIt.replace()`
 - **`CensorPattern` renamed to `LanguagePattern`** - Better semantic naming
 - **Changed from `enum` to `sealed class`** - Better type safety and
   extensibility
 - **Removed `regenerateCensoredText()`** - Use `regenerate()` instead (only for
-  `CensorIt.random()`)
+`CensorIt.random()`)
 - **Removed `toCensorIt()` extension** - Use factory constructors directly
 - **`fromPatterns()` renamed to `multi()`** - `CensorPattern.multi([...])`
 - **SDK minimum version raised to `^3.10.0`**
@@ -47,7 +89,7 @@
 - **`CensorIt.builder()` factory** - Custom replacement logic with builder
   function
 - **`CensorIt.replace()` factory** - Fixed string replacement (e.g.,
-  `[censored]`)
+`[censored]`)
 - **Locale-based pattern selection** - `LanguagePattern.fromLocale('lv')`
 - **Multi-locale patterns** - `LanguagePattern.fromLocales(['en', 'ru', 'es'])`
 - **Simplified `.censored()` extension** - Direct string censoring

@@ -13,8 +13,7 @@ final class ZhPattern implements LanguagePattern {
   @override
   String get locale => 'zh';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?:'
         '操你祖宗十八代|'
         '[操肏艹](?:你|妳|您)?祖宗|'
@@ -37,4 +36,7 @@ final class ZhPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

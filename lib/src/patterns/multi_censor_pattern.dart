@@ -8,9 +8,11 @@ final class MultiCensorPattern implements CensorPattern {
   /// {@template multi_censor_pattern_constructor}
   /// Creates a multi-language pattern from a list of patterns.
   ///
-  /// [patterns] must not be empty.
+  /// An empty [patterns] list is a pattern that matches nothing
+  /// (it never reports profanity).
   ///
-  /// Throws [AssertionError] if [patterns] is empty.
+  /// [patterns] is treated as immutable: the combined [regExp] is built
+  /// once per instance and cached.
   ///
   /// Example:
   /// ```
@@ -32,8 +34,16 @@ final class MultiCensorPattern implements CensorPattern {
   /// The resulting regex uses non-capturing groups and combines
   /// all pattern sources with OR operator (|).
   /// The regex is case-insensitive and Unicode-aware.
+  ///
+  /// The result is built on first access and cached per instance.
+  /// For an empty [patterns] list a regex that never matches is returned
+  /// (a plain `(?:)` would match an empty string at every position).
   @override
-  RegExp get regExp {
+  RegExp get regExp => _cache[this] ??= _build();
+
+  RegExp _build() {
+    if (patterns.isEmpty) return _neverMatches;
+
     final sources = patterns.map((p) => p.regExp.pattern).toList();
     final combined = '(?:${sources.join('|')})';
     return RegExp(
@@ -42,4 +52,14 @@ final class MultiCensorPattern implements CensorPattern {
       unicode: true,
     );
   }
+
+  // The class is `const`, so it cannot hold a lazily computed field.
+  // An [Expando] gives the same per-instance cache without keeping
+  // instances alive.
+  static final Expando<RegExp> _cache = Expando<RegExp>(
+    'MultiCensorPattern.regExp',
+  );
+
+  /// Matches nothing: the negative lookahead of an empty pattern always fails.
+  static final RegExp _neverMatches = RegExp('(?!)');
 }

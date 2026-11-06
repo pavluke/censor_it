@@ -13,8 +13,7 @@ final class UkPattern implements LanguagePattern {
   @override
   String get locale => 'uk';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![а-яіїєґ])'
         '(?:'
         'ху[йяєїео][а-яіїєґ]*'
@@ -26,4 +25,7 @@ final class UkPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

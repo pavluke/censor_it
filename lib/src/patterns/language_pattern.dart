@@ -83,11 +83,7 @@ sealed class LanguagePattern implements CensorPattern {
   }) {
     final effectiveFallback = fallback ?? values;
 
-    if (locales.isEmpty) {
-      return effectiveFallback.length == 1
-          ? effectiveFallback.first
-          : CensorPattern.multi(effectiveFallback);
-    }
+    if (locales.isEmpty) return _combine(effectiveFallback);
 
     final matchedPatterns = <LanguagePattern>{};
 
@@ -103,10 +99,24 @@ sealed class LanguagePattern implements CensorPattern {
         ? matchedPatterns.toList()
         : effectiveFallback;
 
-    return patternsToCombine.length == 1
-        ? patternsToCombine.first
-        : CensorPattern.multi(patternsToCombine);
+    return _combine(patternsToCombine);
   }
+
+  /// Combines [patterns] into one pattern.
+  ///
+  /// Combined patterns are memoized by locale set, so calling
+  /// [fromLocales] on every widget build does not recompile the regex.
+  static CensorPattern _combine(List<LanguagePattern> patterns) {
+    if (patterns.length == 1) return patterns.first;
+
+    final key = patterns.map((p) => p.locale).join(',');
+    return _combined.putIfAbsent(
+      key,
+      () => CensorPattern.multi(List.unmodifiable(patterns)),
+    );
+  }
+
+  static final Map<String, CensorPattern> _combined = {};
 
   /// {@macro zh_pattern}
   static const LanguagePattern chinese = ZhPattern();

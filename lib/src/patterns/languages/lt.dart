@@ -13,8 +13,7 @@ final class LtPattern implements LanguagePattern {
   @override
   String get locale => 'lt';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-ząčęėįšųūž])'
         '(?:'
         'byb[a-ząčęėįšųūž]*'
@@ -26,4 +25,7 @@ final class LtPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

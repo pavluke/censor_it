@@ -13,8 +13,7 @@ final class PtPattern implements LanguagePattern {
   @override
   String get locale => 'pt';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-záàâãçéêíóôõúü])'
         '(?:'
         r'filhos?\s*da\s*puta'
@@ -23,10 +22,13 @@ final class PtPattern implements LanguagePattern {
         '|porr[a-záàâãçéêíóôõúü]*'
         '|puta[a-záàâãçéêíóôõúü]*'
         '|merd[a-záàâãçéêíóôõúü]*'
-        '|cu(?:z[aã]o|zon[aã])?[a-záàâãçéêíóôõúü]*'
+        '|cu(?:z[aã]o|zon[aã])?'
         ')'
         '(?![a-záàâãçéêíóôõúü])',
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

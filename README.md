@@ -51,7 +51,7 @@ Add censor_it to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  censor_it: ^2.1.2
+  censor_it: ^2.2.0
 ```
 
 Or using the command:
@@ -234,8 +234,9 @@ final censor = CensorIt.mask('badword here', pattern: customPattern);
 final text = 'fuck this';
 
 // Get censored string directly
-print(text.censored(pattern: LanguagePattern.english));
-// Output: **** this
+// (random characters, same as CensorIt.random)
+print(text.censor(pattern: LanguagePattern.english));
+// Output: !@#% this (the characters differ on every call)
 ```
 
 ## Regenerating Censored Text (CensorIt.random only)
@@ -268,7 +269,7 @@ print(censor1.censored); // @#%! (original unchanged)
 - **Swear Words Extraction**: Extract list of found profanity
 - **Immutable Design**: `regenerate()` returns new instances
 - **Case Preservation**: Censored text maintains original case
-- **Multilingual Support**: Built-in patterns for 14 languages with Unicode
+- **Multilingual Support**: Built-in patterns for 16 languages with Unicode
   support
 
 ## What's New in v2.0.0

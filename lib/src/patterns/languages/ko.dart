@@ -13,8 +13,7 @@ final class KoPattern implements LanguagePattern {
   @override
   String get locale => 'ko';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?:'
         '[씨시쓔쉬쒸슈][발벌팔펄빨뻘]|'
         'ㅅㅣㅂㅏㄹ|'
@@ -43,4 +42,7 @@ final class KoPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

@@ -13,8 +13,7 @@ final class PlPattern implements LanguagePattern {
   @override
   String get locale => 'pl';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-ząćęłńóśźż])'
         '(?:'
         'kurw[a-ząćęłńóśźż]*'
@@ -28,4 +27,7 @@ final class PlPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

@@ -12,8 +12,7 @@ final class EsPattern implements LanguagePattern {
   @override
   String get locale => 'es';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-záéíóúñü])'
         '(?:'
         r'hijo?s?\s*de\s*puta' // hijo de puta / hijos de puta
@@ -29,4 +28,7 @@ final class EsPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

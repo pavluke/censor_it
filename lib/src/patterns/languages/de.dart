@@ -12,8 +12,7 @@ final class DePattern implements LanguagePattern {
   @override
   String get locale => 'de';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-zäöüß])'
         '(?:'
         '(?:ver)?fick(?:'
@@ -38,4 +37,7 @@ final class DePattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

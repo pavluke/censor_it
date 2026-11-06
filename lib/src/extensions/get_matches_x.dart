@@ -1,5 +1,9 @@
 import '../src.dart';
 
+final Expando<List<RegExpMatch>> _matchesCache = Expando<List<RegExpMatch>>(
+  'CensorIt.matches',
+);
+
 /// Extension for getting regex matches from [CensorIt].
 extension GetMatchesX on CensorIt {
   /// Returns all regex matches found in the original text.
@@ -15,6 +19,10 @@ extension GetMatchesX on CensorIt {
   /// final matches = censor.matches;
   /// print(matches.length); // 3
   /// ```
-  List<RegExpMatch> get matches =>
-      pattern.regExp.allMatches(original.toLowerCase()).toList();
+  ///
+  /// The matches are computed once per [CensorIt] instance and cached.
+  /// The returned list is unmodifiable.
+  List<RegExpMatch> get matches => _matchesCache[this] ??= List.unmodifiable(
+    pattern.regExp.allMatches(original.toLowerCase()),
+  );
 }

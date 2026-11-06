@@ -21,40 +21,36 @@ abstract class CensorIt {
   /// {@macro censor_pattern_param}
   CensorIt(
     this._text, {
-    CensorPattern pattern = LanguagePattern.all,
-  }) : _pattern = pattern;
+    this._pattern = LanguagePattern.all,
+  });
 
   /// {@macro censor_it_random}
   static CensorItRandom random(
     String text, {
     CensorPattern pattern = LanguagePattern.all,
     List<String>? chars,
-  }) =>
-      CensorItRandom(text, pattern: pattern, chars: chars);
+  }) => CensorItRandom(text, pattern: pattern, chars: chars);
 
   ///{@macro censor_it_builder}
   static CensorItBuilder builder(
     String text, {
     required ReplacementBuilder builder,
     CensorPattern pattern = LanguagePattern.all,
-  }) =>
-      CensorItBuilder(text, builder: builder, pattern: pattern);
+  }) => CensorItBuilder(text, builder: builder, pattern: pattern);
 
   /// {@macro censor_it_mask}
   static CensorIt mask(
     String text, {
     String char = '*',
     CensorPattern pattern = LanguagePattern.all,
-  }) =>
-      CensorItMask(text, char: char, pattern: pattern);
+  }) => CensorItMask(text, char: char, pattern: pattern);
 
   ///  {@macro censor_it_replace}
   static CensorItReplace replace(
     String text, {
     required String replacement,
     CensorPattern pattern = LanguagePattern.all,
-  }) =>
-      CensorItReplace(text, replacement: replacement, pattern: pattern);
+  }) => CensorItReplace(text, replacement: replacement, pattern: pattern);
 
   final String _text;
 
@@ -96,15 +92,13 @@ abstract class CensorIt {
   /// Checks if the text contains any profanity based on the censor pattern.
   ///
   /// Returns `true` if at least one profanity word is found, `false` otherwise.
-  bool get hasProfanity => pattern.regExp.hasMatch(original.toLowerCase());
+  bool get hasProfanity => GetMatchesX(this).matches.isNotEmpty;
 
   /// Returns a list of swear words found in the text.
   ///
   /// The words are returned in lowercase and in the order they appear.
-  List<String> get swearWords {
-    final matches = pattern.regExp.allMatches(original.toLowerCase());
-    return matches.map((match) => match.group(0) ?? '').toList();
-  }
+  List<String> get swearWords =>
+      GetMatchesX(this).matches.map((match) => match.group(0) ?? '').toList();
 
   @override
   int get hashCode => Object.hash(original, pattern);

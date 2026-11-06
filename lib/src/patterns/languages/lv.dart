@@ -13,11 +13,10 @@ final class LvPattern implements LanguagePattern {
   @override
   String get locale => 'lv';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![a-zāčēģīķļņšūž])'
         '(?:'
-        'pis[a-zāčēģīķļņšūž]*'
+        'pis(?!to[nl]|tāc|tac|a(?![a-zāčēģīķļņšūž]))[a-zāčēģīķļņšūž]*'
         '|pizd[a-zāčēģīķļņšūž]*'
         '|dir[sš][a-zāčēģīķļņšūž]*'
         '|pimp[a-zāčēģīķļņšūž]*'
@@ -33,4 +32,7 @@ final class LvPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }

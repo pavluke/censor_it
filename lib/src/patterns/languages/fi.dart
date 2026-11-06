@@ -12,11 +12,10 @@ final class FiPattern implements LanguagePattern {
   @override
   String get locale => 'fi';
 
-  @override
-  RegExp get regExp => RegExp(
+  static final RegExp _regExp = RegExp(
         '(?<![A-Za-zÀ-ÖØ-öø-ÿ])'
         '(?:'
-        'vit{1,2}[a-zåäö]*' // vittu, vitun, vittua, vittuun...
+        'vitt?u[a-zåäö]*' // vittu, vitun, vittua, vittuun...
         '|(?:kyrp|kyrv)[aä][a-zåäö]*' // kyrpä, kyrpää, kyrvän...
         '|pillu[a-zåäö]*' // pillu, pillun, pilluja...
         '|huor[a-zåäö]*' // huora, huorat, huoran...
@@ -25,4 +24,7 @@ final class FiPattern implements LanguagePattern {
         caseSensitive: false,
         unicode: true,
       );
+
+  @override
+  RegExp get regExp => _regExp;
 }
